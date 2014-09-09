@@ -1,0 +1,100 @@
+{
+    "meta": {
+        "type": "meta",
+        "name": "Bauru Digital"
+    },
+    
+    "label": {
+        "type": "integer",
+        "id": "3",
+        "default": "-1",
+        "priority": "12",
+        "options": {
+            "0": "none",
+            "1": "Warp Records",
+            "2": "Touch & Go",
+            "3": "Warner Bros.",
+            "4": "Sony Music",
+            "5": "S.Y.R.",
+            "6": "The Leaf Label"
+        },
+        "toggles": {
+          "0":["teste é teste"],
+          "1":["teste2"],
+          "2":["teste3", "teste4"],
+          "3":["teste4"]
+        }
+    },
+   
+    "teste é teste": {
+        "type": "integer",
+        "id": "teste",
+        "default": "0",
+        "priority": "13",
+        "options": {
+            "0": "N/A",
+            "1": "Spain",
+            "2": "Italy",
+            "3": "Germany",
+            "4": "France",
+            "5": "Japan",
+            "6": "Australia",
+            "7": "China",
+            "8": "United States"
+        }
+    }, 
+    
+    "teste2": {
+        "type": "integer",
+        "id": "teste2",
+        "default": "0",
+        "priority": "14",
+        "options": {
+            "0": "N/A",
+            "1": "Spain",
+            "2": "Italy",
+            "3": "Germany",
+            "4": "France",
+            "5": "Japan",
+            "6": "Australia",
+            "7": "China",
+            "8": "United States"
+        }
+    }, 
+    
+    "teste3": {
+        "type": "integer",
+        "id": "teste3",
+        "default": "0",
+        "priority": "15",
+        "options": {
+            "0": "N/A",
+            "1": "Spain",
+            "2": "Italy",
+            "3": "Germany",
+            "4": "France",
+            "5": "Japan",
+            "6": "Australia",
+            "7": "China",
+            "8": "United States"
+        }
+    }, 
+    
+    "teste4": {
+        "type": "integer",
+        "id": "teste4",
+        "default": "0",
+        "priority": "16",
+        "options": {
+            "0": "N/A",
+            "1": "Spain",
+            "2": "Italy",
+            "3": "Germany",
+            "4": "France",
+            "5": "Japan",
+            "6": "Australia",
+            "7": "China",
+            "8": "United States"
+        }
+    }
+}

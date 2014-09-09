@@ -1,0 +1,103 @@
+{
+    "meta": {
+        "type": "meta",
+        "name": "Music Album" 
+    },
+    "artist": {
+        "type": "string",
+        "id": "0",
+        "default": "",
+        "priority": "0"
+    },
+    "album_title": {
+        "type": "string",
+        "id": "1",
+        "default": "",
+        "priority": "1" 
+    },
+    "release_date": {
+        "type": "integer",
+        "id": "2",
+        "default": "",
+        "priority": "2",
+        "hint":"Example: 10/30/1999"
+    },
+    "label": {
+        "type": "integer",
+        "id": "3",
+        "default": "0",
+        "priority": "3",
+        "options": {
+            "0": "None",
+            "1": "Warp Records",
+            "2": "Touch & Go",
+            "3": "Warner Bros.",
+            "4": "Sony Music",
+            "5": "S.Y.R.",
+            "6": "The Leaf Label" 
+        },
+        "toggles": {
+          "1":["formats"],
+          "2":["formats"]
+        }
+    },
+    "formats": {
+        "type": "integer",
+        "id": "4",
+        "default": "0",
+        "priority": "4",
+        "options": {
+            "0": "None",
+            "1": "Compact Disk",
+            "2": "Record/Vinyl",
+            "3": "MP3/Download",
+            "4": "Cassette",
+            "5": "8-Track",
+            "6": "Wax Cylinder",
+            "7": "Laser Disc",
+            "8": "Mini-Disk" 
+        } 
+    },
+    "genre": {
+        "type": "integer",
+        "id": "5",
+        "default": "0",
+        "priority": "5",
+        "options": {
+            "0": "None",
+            "1": "Rock",
+            "2": "Electronic",
+            "3": "Country",
+            "4": "Hip-Hop",
+            "5": "Jazz",
+            "6": "Pop",
+            "7": "World" 
+        } 
+    },
+    "import": {
+        "type": "boolean",
+        "id": "6",
+        "default": "0",
+        "priority": "7",
+        "toggles": {
+            "1": [ "imported_from" ] 
+        } 
+    },
+    "imported_from": {
+        "type": "integer",
+        "id": "7",
+        "default": "0",
+        "priority": "8",
+        "options": {
+            "0": "N/A",
+            "1": "Spain",
+            "2": "Italy",
+            "3": "Germany",
+            "4": "France",
+            "5": "Japan",
+            "6": "Australia",
+            "7": "China",
+            "8": "United States" 
+        } 
+    }
+}

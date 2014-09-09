@@ -1,0 +1,220 @@
+[
+    {
+        "name": "Bauru Digital",
+        "type": "meta"
+    },
+    {
+        "name": "Pesquisar Endereço",
+        "type": "AutoCompleteTextView",
+        "id": "search_country",
+        "default": "",
+        "priority": "0",
+        "options": {
+            "db_url": [
+                "http://192.168.0.171:8000/"
+            ],
+            "db_name": [
+                "tasks.db"
+            ],
+            "inputColumns": [
+                "name",
+                "number",
+                "featureId",
+                "postalCode"
+            ],
+            "outputColumn": [
+                "featureId"
+            ],
+            "presentationColumns": [
+                "name",
+                "featureId"
+            ],
+            "tableName": [
+                "address"
+            ]
+        }
+    },
+    {
+        "name": "Desconformidade",
+        "type": "Spinner",
+        "id": "spinner_disconform",
+        "default": "0",
+        "priority": "1",
+        "options": {
+            "0": "Não detectada",
+            "1": "Desconforme",
+            "2": "Vago",
+            "3": "Desmembrado",
+            "4": "Unificado"
+        },
+        "hideOnClick": {
+            "0": [
+                "number_confirmation",
+                "aditional_numbers",
+                "primary_use",
+                "secondary_use",
+                "camera_button"
+            ],
+            "2": [
+                "number_confirmation",
+                "aditional_numbers",
+                "primary_use",
+                "secondary_use",
+                "camera_button"
+            ]
+        }
+    },
+    {
+        "name": "Confirmação do Número",
+        "type": "Spinner",
+        "id": "number_confirmation",
+        "default": "0",
+        "priority": "2",
+        "options": {
+            "0": "Ok",
+            "1": "Inexistente",
+            "2": "Não confere"
+        },
+        "hideOnClick": {
+            "0": [
+                "aditional_numbers"
+            ],
+            "1": [
+                "aditional_numbers"
+            ]
+        }
+    },
+    {
+        "name": "Números Adicionais",
+        "type": "IntegerTextView",
+        "id": "aditional_numbers",
+        "default": "",
+        "priority": "3"
+    },
+    {
+        "name": "Uso Principal",
+        "type": "Spinner",
+        "id": "primary_use",
+        "default": "0",
+        "priority": "4",
+        "options": {
+            "0": "",
+            "1": "Nenhum",
+            "2": "Residencial",
+            "3": "Comercial",
+            "4": "Serviços",
+            "5": "Industrial",
+            "6": "Religioso",
+            "7": "Em Construção",
+            "8": "Indefinido"
+        }
+    },
+    {
+        "name": "Uso Secundário",
+        "type": "Spinner",
+        "id": "secondary_use",
+        "default": "0",
+        "priority": "5",
+        "options": {
+            "0": "",
+            "1": "Nenhum",
+            "2": "Residencial",
+            "3": "Comercial",
+            "4": "Serviços",
+            "5": "Industrial",
+            "6": "Religioso",
+            "7": "Em Construção",
+            "8": "Indefinido"
+        }
+    },
+    {
+        "name": "Infraestrutura",
+        "type": "Accordion",
+        "id": "lbl_title_infrastructure",
+        "priority": "1",
+        "children": ["pavimentation", "asphalt_guide", "public_ilumination", "energy", "pluvial_gallery", "observation"]
+    },  
+    
+      
+    {
+        "name": "Obter Foto",
+        "type": "camera_button",
+        "id": "camera_button",
+        "default": "",
+        "priority": "7"
+    },
+    {
+        "name": "Pavimentação",
+        "type": "Spinner",
+        "id": "pavimentation",
+        "default": "0",
+        "priority": "8",
+        "options": {
+            "0": "",
+            "1": "Asfalto",
+            "2": "Paralelepípedo",
+            "3": "Lajota Intervalada",
+            "4": "Sem Pavimentação",
+            "5": "Parcial"
+        }
+    },
+    {
+        "name": "Guias",
+        "type": "Spinner",
+        "id": "asphalt_guide",
+        "default": "0",
+        "priority": "9",
+        "options": {
+            "0": "",
+            "1": "Sim",
+            "2": "Não",
+            "3": "Parcial"
+        }
+    },
+    {
+        "name": "Iluminação Pública",
+        "type": "Spinner",
+        "id": "public_ilumination",
+        "default": "0",
+        "priority": "10",
+        "options": {
+            "0": "",
+            "1": "Sim",
+            "2": "Não",
+            "3": "Parcial"
+        }
+    },
+    {
+        "name": "Energia elétrica",
+        "type": "Spinner",
+        "id": "energy",
+        "default": "0",
+        "priority": "11",
+        "options": {
+            "0": "",
+            "1": "Sim",
+            "2": "Não",
+            "3": "Parcial"
+        }
+    },
+    {
+        "name": "Galeria Pluvial",
+        "type": "Spinner",
+        "id": "pluvial_gallery",
+        "default": "0",
+        "priority": "12",
+        "options": {
+            "0": "",
+            "1": "Sim",
+            "2": "Não",
+            "3": "Parcial"
+        }
+    },
+    {
+        "name": "Observações",
+        "type": "StringTextView",
+        "id": "observation",
+        "default": "",
+        "priority": "13"
+    }
+]
