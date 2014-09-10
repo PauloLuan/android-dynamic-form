@@ -1,4 +1,4 @@
-package makemachine.android.formgenerator;
+package terracore.formgenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

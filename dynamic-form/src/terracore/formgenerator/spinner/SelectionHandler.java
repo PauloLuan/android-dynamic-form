@@ -1,6 +1,6 @@
-package makemachine.android.formgenerator.spinner;
+package terracore.formgenerator.spinner;
 
-import makemachine.android.formgenerator.FormSpinner;
+import terracore.formgenerator.FormSpinner;
 import android.view.View;
 import android.widget.AdapterView;
 

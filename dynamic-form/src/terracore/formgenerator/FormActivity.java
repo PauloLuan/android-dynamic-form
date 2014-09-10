@@ -1,4 +1,4 @@
-package makemachine.android.formgenerator;
+package terracore.formgenerator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,13 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import makemachine.android.formgenerator.accordion.FormAccordion;
-import makemachine.android.formgenerator.spinner.SelectionHandler;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import terracore.formgenerator.accordion.FormAccordion;
+import terracore.formgenerator.spinner.SelectionHandler;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

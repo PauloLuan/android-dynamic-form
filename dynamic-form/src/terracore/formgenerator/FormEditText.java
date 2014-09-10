@@ -1,4 +1,4 @@
-package makemachine.android.formgenerator;
+package terracore.formgenerator;
 
 import android.content.Context;
 import android.view.inputmethod.EditorInfo;

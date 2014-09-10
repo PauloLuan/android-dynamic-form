@@ -7,13 +7,13 @@
  * 
  * */
 
-package makemachine.android.formgenerator.autocompletetext;
+package terracore.formgenerator.autocompletetext;
 
 import java.util.List;
 
 import makemachine.android.examples.forms.R;
-import makemachine.android.formgenerator.FormAutoCompleteTextBox;
-import makemachine.android.formgenerator.database.DatabaseDao;
+import terracore.formgenerator.FormAutoCompleteTextBox;
+import terracore.formgenerator.database.DatabaseDao;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.Editable;

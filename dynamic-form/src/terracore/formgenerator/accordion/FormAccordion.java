@@ -1,9 +1,9 @@
-package makemachine.android.formgenerator.accordion;
+package terracore.formgenerator.accordion;
 
 import java.util.List;
 
 import makemachine.android.examples.forms.R;
-import makemachine.android.formgenerator.FormWidget;
+import terracore.formgenerator.FormWidget;
 import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;

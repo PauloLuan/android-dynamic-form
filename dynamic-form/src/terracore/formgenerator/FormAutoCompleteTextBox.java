@@ -1,13 +1,12 @@
-package makemachine.android.formgenerator;
+package terracore.formgenerator;
 
 import java.util.HashMap;
 import java.util.List;
 
-import makemachine.android.formgenerator.autocompletetext.AsyncFetchRemoteFile;
-import makemachine.android.formgenerator.autocompletetext.AutoCompleteListener;
-
 import org.json.JSONObject;
 
+import terracore.formgenerator.autocompletetext.AsyncFetchRemoteFile;
+import terracore.formgenerator.autocompletetext.AutoCompleteListener;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;

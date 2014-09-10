@@ -7,7 +7,7 @@
  * 
  * */
 
-package makemachine.android.formgenerator.database;
+package terracore.formgenerator.database;
 
 import android.content.Context;
 import android.database.SQLException;

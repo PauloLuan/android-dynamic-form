@@ -7,7 +7,7 @@
  * 
  * */
 
-package makemachine.android.formgenerator.autocompletetext;
+package terracore.formgenerator.autocompletetext;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

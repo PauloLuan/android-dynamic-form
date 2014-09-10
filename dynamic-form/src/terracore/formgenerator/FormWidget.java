@@ -1,4 +1,4 @@
-package makemachine.android.formgenerator;
+package terracore.formgenerator;
 
 import java.text.Collator;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package makemachine.android.formgenerator.autocompletetext;
+package terracore.formgenerator.autocompletetext;
 
 import java.util.List;
 

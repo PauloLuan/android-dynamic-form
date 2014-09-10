@@ -1,6 +1,6 @@
-package makemachine.android.examples.forms;
+package terracore.example.forms;
 
-import makemachine.android.formgenerator.FormActivity;
+import terracore.formgenerator.FormActivity;
 import android.os.Bundle;
 
 public class FormGeneratorExample extends FormActivity {
