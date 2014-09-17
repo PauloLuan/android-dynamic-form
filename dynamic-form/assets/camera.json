@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Camera Tests",
+        "type": "meta"
+    },
+    {
+        "name": "Take a Photo",
+        "type": "Camera",
+        "id": "camera_button",
+        "default": "",
+        "priority": "7"
+    }
+]
