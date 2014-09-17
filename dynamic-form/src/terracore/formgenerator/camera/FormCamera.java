@@ -52,12 +52,12 @@ public class FormCamera extends FormWidget implements Serializable {
         }
         
         public void initializePhotosPreviewLayout() {
-                horizontalScrollView = new HorizontalScrollView(context);
                 photosPreview = new LinearLayout(context);
-                
                 photosPreview.setOrientation(LinearLayout.HORIZONTAL);
                 
+                horizontalScrollView = new HorizontalScrollView(context);
                 horizontalScrollView.addView(photosPreview);
+                
                 _layout.addView(horizontalScrollView);
         }
         
