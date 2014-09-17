@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import terracore.formgenerator.accordion.FormAccordion;
+import terracore.formgenerator.camera.FormCamera;
 import terracore.formgenerator.spinner.SelectionHandler;
 import android.app.Activity;
 import android.content.Context;
@@ -45,6 +46,7 @@ public abstract class FormActivity extends Activity {
         public static final String            SCHEMA_KEY_AUTOCOMPLETE_TEXTVIEW = "AutoCompleteTextView";
         public static final String            SCHEMA_KEY_LABEL                 = "Label";
         public static final String            SCHEMA_KEY_ACCORDION             = "Accordion";
+        public static final String            SCHEMA_KEY_CAMERA                = "Camera";
         
         public static final String            SCHEMA_KEY_PRIORITY              = "priority";
         public static final String            SCHEMA_KEY_TOGGLES               = "toggles";
@@ -511,6 +513,10 @@ public abstract class FormActivity extends Activity {
                                 List<String> childrenIds = FormWidget.jsonArrayToJavaArray(children);
                                 
                                 formWidget = new FormAccordion(this, labelName, childrenIds);
+                        }
+                        
+                        if (type.equals(FormActivity.SCHEMA_KEY_CAMERA)) {
+                                formWidget = new FormCamera(this, labelName);
                         }
                         
                         if (type.equals(FormActivity.SCHEMA_KEY_STRING_TEXTVIEW)) {
