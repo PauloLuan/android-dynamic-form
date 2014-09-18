@@ -132,7 +132,7 @@ public class FormCamera extends FormWidget implements Serializable {
                 imageView.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                Uri uri = Uri.parse(photoPath);
+                                Uri uri = Uri.fromFile(new File(photoPath));
                                 
                                 Intent intent = new Intent();
                                 intent.setDataAndType(uri, "image/*");
