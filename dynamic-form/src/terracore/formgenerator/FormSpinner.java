@@ -69,7 +69,12 @@ public class FormSpinner extends FormWidget {
         @Override
         public String getValue() {
                 int spinnerPosition = _spinner.getSelectedItemPosition();
-                //String value = _propmap.get(_adapter.getItem(spinnerPosition));
+                String value = _propmap.get(_adapter.getItem(spinnerPosition));
+                return value;
+        }
+        
+        public String getPosition() {
+                int spinnerPosition = _spinner.getSelectedItemPosition();
                 return "" + spinnerPosition;
         }
         
@@ -148,7 +153,7 @@ public class FormSpinner extends FormWidget {
                 ArrayList<String> widgetsToHide = new ArrayList<String>();
                 
                 if (_widgetsToHide != null) {
-                        String value = getValue();
+                        String value = getPosition();
                         
                         if (_widgetsToHide.get(value) != null) {
                                 widgetsToHide = _widgetsToHide.get(value);
