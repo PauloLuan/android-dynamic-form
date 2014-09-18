@@ -51,6 +51,11 @@ public class FormCamera extends FormWidget implements Serializable {
                 initializePhotosPreviewLayout();
         }
         
+        @Override
+        public String getPropertyName() {
+                return "photos";
+        }
+        
         public void initializePhotosPreviewLayout() {
                 photosPreview = new LinearLayout(context);
                 photosPreview.setOrientation(LinearLayout.HORIZONTAL);
