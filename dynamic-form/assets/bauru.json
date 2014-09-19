@@ -52,15 +52,13 @@
                 "number_confirmation",
                 "aditional_numbers",
                 "primary_use",
-                "secondary_use",
-                "camera_button"
+                "secondary_use"
             ],
             "2": [
                 "number_confirmation",
                 "aditional_numbers",
                 "primary_use",
-                "secondary_use",
-                "camera_button"
+                "secondary_use"
             ]
         }
     },
@@ -134,11 +132,9 @@
         "priority": "1",
         "children": ["pavimentation", "asphalt_guide", "public_ilumination", "energy", "pluvial_gallery", "observation"]
     },  
-    
-      
     {
         "name": "Obter Foto",
-        "type": "camera_button",
+        "type": "Camera",
         "id": "camera_button",
         "default": "",
         "priority": "7"

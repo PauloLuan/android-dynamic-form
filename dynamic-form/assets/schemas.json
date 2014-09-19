@@ -1,7 +1,7 @@
 {
     "meta": {
         "type": "meta",
-        "name": "Music Album" 
+        "name": "Music Album"
     },
     "artist": {
         "type": "string",
@@ -13,14 +13,14 @@
         "type": "string",
         "id": "1",
         "default": "",
-        "priority": "1" 
+        "priority": "1"
     },
     "release_date": {
         "type": "integer",
         "id": "2",
         "default": "",
         "priority": "2",
-        "hint":"Example: 10/30/1999"
+        "hint": "Example: 10/30/1999"
     },
     "label": {
         "type": "integer",
@@ -34,11 +34,15 @@
             "3": "Warner Bros.",
             "4": "Sony Music",
             "5": "S.Y.R.",
-            "6": "The Leaf Label" 
+            "6": "The Leaf Label"
         },
         "toggles": {
-          "1":["formats"],
-          "2":["formats"]
+            "1": [
+                "formats"
+            ],
+            "2": [
+                "formats"
+            ]
         }
     },
     "formats": {
@@ -55,8 +59,8 @@
             "5": "8-Track",
             "6": "Wax Cylinder",
             "7": "Laser Disc",
-            "8": "Mini-Disk" 
-        } 
+            "8": "Mini-Disk"
+        }
     },
     "genre": {
         "type": "integer",
@@ -71,8 +75,8 @@
             "4": "Hip-Hop",
             "5": "Jazz",
             "6": "Pop",
-            "7": "World" 
-        } 
+            "7": "World"
+        }
     },
     "import": {
         "type": "boolean",
@@ -80,8 +84,10 @@
         "default": "0",
         "priority": "7",
         "toggles": {
-            "1": [ "imported_from" ] 
-        } 
+            "1": [
+                "imported_from"
+            ]
+        }
     },
     "imported_from": {
         "type": "integer",
@@ -97,7 +103,7 @@
             "5": "Japan",
             "6": "Australia",
             "7": "China",
-            "8": "United States" 
-        } 
+            "8": "United States"
+        }
     }
 }
