@@ -131,6 +131,7 @@ public class FormAutoCompleteTextBox extends FormWidget {
         
         @Override
         public void setValue(String value) {
+                _input.setText(value);
                 this.value = value;
         }
         
