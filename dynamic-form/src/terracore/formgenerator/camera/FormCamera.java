@@ -82,6 +82,7 @@ public class FormCamera extends FormWidget implements Serializable {
         
         public void setPhotos(List<String> photos) {
                 this.photos = photos;
+                updatePhotos();
         }
         
         /**
