@@ -69,7 +69,12 @@ public class FormSpinner extends FormWidget {
         @Override
         public String getValue() {
                 int spinnerPosition = _spinner.getSelectedItemPosition();
-                String value = _propmap.get(_adapter.getItem(spinnerPosition));
+                String value = "";
+                
+                if (isVisible()) {
+                        value = _adapter.getItem(spinnerPosition);
+                }
+                
                 return value;
         }
         

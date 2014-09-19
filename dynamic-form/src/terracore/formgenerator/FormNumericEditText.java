@@ -21,7 +21,13 @@ public class FormNumericEditText extends FormWidget {
         }
         
         public String getValue() {
-                return _input.getText().toString();
+                String value = "";
+                
+                if (isVisible()) {
+                        value = _input.getText().toString();
+                }
+                
+                return value;
         }
         
         public void setValue(String value) {

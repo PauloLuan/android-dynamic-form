@@ -26,7 +26,13 @@ public class FormCheckBox extends FormWidget {
         
         @Override
         public String getValue() {
-                return String.valueOf(_checkbox.isChecked() ? "1" : "0");
+                String value = "";
+                
+                if (isVisible()) {
+                        value = String.valueOf(_checkbox.isChecked() ? "1" : "0");
+                }
+                
+                return value;
         }
         
         public void setValue(String value) {

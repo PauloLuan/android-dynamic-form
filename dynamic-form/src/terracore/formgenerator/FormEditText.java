@@ -19,7 +19,13 @@ public class FormEditText extends FormWidget {
         
         @Override
         public String getValue() {
-                return _input.getText().toString();
+                String value = "";
+                
+                if (isVisible()) {
+                        _input.getText().toString();
+                }
+                
+                return value;
         }
         
         @Override

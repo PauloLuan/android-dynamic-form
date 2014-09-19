@@ -363,14 +363,19 @@ public abstract class FormActivity extends Activity {
                         for (int i = 0; i < _widgets.size(); i++) {
                                 widget = _widgets.get(i);
                                 
-                                if (widget instanceof FormLabelTitle == false || widget instanceof FormAccordion == false) {
+                                boolean isFormLabelTitle = widget instanceof FormLabelTitle;
+                                boolean isFormAccordion = widget instanceof FormAccordion;
+                                
+                                if (!isFormLabelTitle && !isFormAccordion) {
                                         
                                         if (widget instanceof FormCamera) {
                                                 FormCamera formCamera = (FormCamera) widget;
                                                 data.put(widget.getPropertyName(), formCamera.getPhotos());
                                         }
                                         else {
-                                                data.put(widget.getPropertyName(), widget.getValue());
+                                                String propertyName = widget.getPropertyName();
+                                                String value = widget.getValue() != null ? widget.getValue() : "";
+                                                data.put(propertyName, value);
                                         }
                                 }
                         }
