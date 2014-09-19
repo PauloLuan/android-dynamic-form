@@ -9,6 +9,5 @@ public class FormGeneratorExample extends FormActivity {
         public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 generateForm(FormActivity.parseFileToString(this, "bauru.json"));
-                save();
         }
 }
