@@ -95,7 +95,7 @@ public abstract class FormActivity extends Activity {
                                 break;
                         
                         case OPTION_POPULATE:
-                                //populate(FormActivity.parseFileToString(this, "data.json"));
+                                populate(FormActivity.parseFileToString(this, "bauru_data.json"));
                                 break;
                         
                         case OPTION_CANCEL:
@@ -303,22 +303,48 @@ public abstract class FormActivity extends Activity {
          */
         protected void populate(String jsonString) {
                 try {
-                        String prop;
+                        String property;
                         FormWidget widget;
                         JSONObject data = new JSONObject(jsonString);
                         JSONArray properties = data.names();
                         
                         for (int i = 0; i < properties.length(); i++) {
-                                prop = properties.getString(i);
-                                if (_map.containsKey(prop)) {
-                                        widget = _map.get(prop);
-                                        widget.setValue(data.getString(prop));
+                                property = properties.getString(i);
+                                
+                                if (_map.containsKey(property)) {
+                                        widget = _map.get(property);
+                                        
+                                        if (widget instanceof FormCamera) {
+                                                FormCamera formCamera = (FormCamera) widget;
+                                                ArrayList<String> photos = jsonArrayToList(data.getJSONArray(property));
+                                                formCamera.setPhotos(photos);
+                                        }
+                                        else {
+                                                widget.setValue(data.getString(property));
+                                        }
                                 }
                         }
                 }
                 catch (JSONException e) {
-                        
+                        Log.e(LOG_TAG, e.getMessage());
                 }
+        }
+        
+        public ArrayList<String> jsonArrayToList(JSONArray jArray) {
+                ArrayList<String> listdata = new ArrayList<String>();
+                
+                if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                                try {
+                                        listdata.add(jArray.get(i).toString());
+                                }
+                                catch (JSONException e) {
+                                        e.printStackTrace();
+                                }
+                        }
+                }
+                
+                return listdata;
         }
         
         /**
