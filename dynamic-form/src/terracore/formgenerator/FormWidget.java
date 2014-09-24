@@ -287,4 +287,10 @@ public abstract class FormWidget {
         public void hideWidget(FormWidget widget) {
                 widget.setVisibility(View.GONE);
         }
+        
+        /**
+         * Clears the field to the original value, like blank field or blank
+         * option on spinner.
+         */
+        public void clear() {}
 }

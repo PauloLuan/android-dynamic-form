@@ -189,4 +189,10 @@ public class FormCamera extends FormWidget implements Serializable {
                 return inSampleSize;
         }
         
+        @Override
+        public void clear() {
+                photos.clear();
+                updatePhotos();
+        }
+        
 }

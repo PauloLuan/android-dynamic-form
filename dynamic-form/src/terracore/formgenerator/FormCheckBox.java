@@ -125,4 +125,10 @@ public class FormCheckBox extends FormWidget {
                                      FormActivity.FormWidgetToggleHandler handler) {
                 _checkbox.setOnCheckedChangeListener(new ChangeHandler(this));
         }
+        
+        @Override
+        public void clear() {
+                _checkbox.setChecked(false);
+        }
+        
 }

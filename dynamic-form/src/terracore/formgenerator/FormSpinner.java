@@ -172,4 +172,10 @@ public class FormSpinner extends FormWidget {
                                      HashMap<String, ArrayList<String>> _widgetsToHide) {
                 this._widgetsToHide = _widgetsToHide;
         }
+        
+        @Override
+        public void clear() {
+                _spinner.setSelection(0);
+        }
+        
 }

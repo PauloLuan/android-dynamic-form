@@ -38,4 +38,9 @@ public class FormNumericEditText extends FormWidget {
         public void setHint(String value) {
                 _input.setHint(value);
         }
+        
+        @Override
+        public void clear() {
+                _input.setText("");
+        }
 }
