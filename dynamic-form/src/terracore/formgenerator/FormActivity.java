@@ -677,6 +677,7 @@ public abstract class FormActivity extends Activity {
                 buttonSave.setCompoundDrawablesWithIntrinsicBounds(null, saveIcon, null, null);
                 buttonSave.setText(getResources().getString(string.btn_save));
                 
+                // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonSave.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
                 buttonSave.setOnClickListener(new OnClickListener() {
@@ -707,9 +708,6 @@ public abstract class FormActivity extends Activity {
                                 for (FormWidget widget : _widgets) {
                                         widget.clear();
                                 }
-                                
-                                // iterate over widgets array and call the "clear" function. 
-                                // TODO: implementar a função 'clear' nos widgets.
                         }
                 });
                 
