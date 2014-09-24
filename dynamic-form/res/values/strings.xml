@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="hello">Hello World, FormGeneratorExample!</string>
     <string name="app_name">Form Generator Example</string>
+
+    <!-- Form Activity -->
+    <string name="btn_save">Salvar</string>
+    <string name="btn_clear">Limpar</string>
+    <string name="btn_cancel">Cancelar</string>
+
 </resources>
