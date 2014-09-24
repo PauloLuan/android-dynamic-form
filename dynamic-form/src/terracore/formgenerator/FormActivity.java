@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import makemachine.android.examples.forms.R;
+import makemachine.android.examples.forms.R.string;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,15 +21,21 @@ import terracore.formgenerator.camera.FormCamera;
 import terracore.formgenerator.spinner.SelectionHandler;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
 /**
  * FormActivity allows you to create dynamic form layouts based upon a json
@@ -126,6 +135,8 @@ public abstract class FormActivity extends Activity {
                 
                 initToggles();
                 initializeWidgetsVisibility();
+                
+                createMenuButtons();
         }
         
         /**
@@ -641,9 +652,85 @@ public abstract class FormActivity extends Activity {
                                 //Log.i("Applying Handler", formSpinner._displayText);
                                 SelectionHandler handler = new SelectionHandler(formSpinner);
                                 spinner.setOnItemSelectedListener(handler);
-                                
                         }
                 }
+        }
+        
+        public void createMenuButtons() {
+                TableLayout buttonsLayout = new TableLayout(this);
+                buttonsLayout.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 
+                TableRow row = new TableRow(this);
+                
+                row.addView(createCancelButton());
+                row.addView(createClearButton());
+                row.addView(createSaveButton());
+                
+                buttonsLayout.addView(row);
+                
+                _formLayout.addView(buttonsLayout);
+        }
+        
+        public Button createSaveButton() {
+                Button buttonSave = new Button(this);
+                Drawable saveIcon = getResources().getDrawable(R.drawable.ic_action_save);
+                buttonSave.setCompoundDrawablesWithIntrinsicBounds(null, saveIcon, null, null);
+                buttonSave.setText(getResources().getString(string.btn_save));
+                
+                buttonSave.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+                
+                buttonSave.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                String result = save().toString();
+                                Intent data = new Intent();
+                                data.putExtra("RESULT", result);
+                                setResult(RESULT_OK, data);
+                                finish();
+                        }
+                });
+                
+                return buttonSave;
+        }
+        
+        public Button createClearButton() {
+                Button buttonClear = new Button(this);
+                Drawable clearIcon = getResources().getDrawable(R.drawable.ic_action_discard);
+                buttonClear.setCompoundDrawablesWithIntrinsicBounds(null, clearIcon, null, null);
+                buttonClear.setText(getResources().getString(string.btn_clear));
+                
+                buttonClear.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+                
+                buttonClear.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                for (FormWidget widget : _widgets) {
+                                        widget.clear();
+                                }
+                                
+                                // iterate over widgets array and call the "clear" function. 
+                                // TODO: implementar a função 'clear' nos widgets.
+                        }
+                });
+                
+                return buttonClear;
+        }
+        
+        public Button createCancelButton() {
+                Button buttonCancel = new Button(this);
+                Drawable cancelIcon = getResources().getDrawable(R.drawable.ic_action_cancel);
+                buttonCancel.setCompoundDrawablesWithIntrinsicBounds(null, cancelIcon, null, null);
+                buttonCancel.setText(getResources().getString(string.btn_cancel));
+                
+                buttonCancel.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1.0f));
+                
+                buttonCancel.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                finish();
+                        }
+                });
+                
+                return buttonCancel;
         }
 }
