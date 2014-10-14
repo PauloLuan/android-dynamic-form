@@ -90,9 +90,9 @@ public class FormSpinner extends FormWidget {
                         JSONArray names = _options.names();
                         for (int i = 0; i < names.length(); i++) {
                                 name = names.getString(i);
+                                String item = _options.getString(name);
                                 
-                                if (name.equals(value)) {
-                                        String item = _options.getString(name);
+                                if (name.equals(value) || item.equals(value)) {
                                         _spinner.setSelection(_adapter.getPosition(item));
                                 }
                         }
