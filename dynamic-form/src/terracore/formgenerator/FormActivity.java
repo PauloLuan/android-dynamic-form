@@ -77,6 +77,12 @@ public abstract class FormActivity extends Activity {
         protected LinearLayout                _formLayout;
         protected ScrollView                  _scrollView;
         
+        // -- Buttons
+        public Button                         buttonDelete;
+        public Button                         buttonSave;
+        public Button                         buttonCancel;
+        public Button                         buttonClear;
+        
         // -----------------------------------------------
         //
         // Context menu options.
@@ -331,7 +337,8 @@ public abstract class FormActivity extends Activity {
                                                 formCamera.setPhotos(photos);
                                         }
                                         else {
-                                                widget.setValue(data.getString(property));
+                                                String value = data.getString(property);
+                                                widget.setValue(value);
                                         }
                                 }
                         }
@@ -379,14 +386,15 @@ public abstract class FormActivity extends Activity {
                                 
                                 if (!isFormLabelTitle && !isFormAccordion) {
                                         
+                                        String propertyId = widget.getId();
+                                        
                                         if (widget instanceof FormCamera) {
                                                 FormCamera formCamera = (FormCamera) widget;
-                                                data.put(widget.getPropertyName(), formCamera.getPhotos());
+                                                data.put(propertyId, formCamera.getPhotos());
                                         }
                                         else {
-                                                String propertyName = widget.getPropertyName();
                                                 String value = widget.getValue() != null ? widget.getValue() : "";
-                                                data.put(propertyName, value);
+                                                data.put(propertyId, value);
                                         }
                                 }
                         }
@@ -672,7 +680,7 @@ public abstract class FormActivity extends Activity {
         }
         
         public Button createSaveButton() {
-                Button buttonSave = new Button(this);
+                buttonSave = new Button(this);
                 Drawable saveIcon = getResources().getDrawable(R.drawable.ic_action_save);
                 buttonSave.setCompoundDrawablesWithIntrinsicBounds(null, saveIcon, null, null);
                 buttonSave.setText(getResources().getString(string.btn_save));
@@ -680,22 +688,43 @@ public abstract class FormActivity extends Activity {
                 // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonSave.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
-                buttonSave.setOnClickListener(new OnClickListener() {
+                return buttonSave;
+        }
+        
+        public Button createDeleteButton() {
+                buttonDelete = new Button(this);
+                Drawable saveIcon = getResources().getDrawable(R.drawable.ic_action_discard);
+                buttonDelete.setCompoundDrawablesWithIntrinsicBounds(null, saveIcon, null, null);
+                buttonDelete.setText(getResources().getString(string.btn_save));
+                
+                // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
+                buttonDelete.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+                
+                buttonDelete.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                String result = save().toString();
+                                
+                                // if(atributoIdentificador) {  ...  } else { finish(); }
+                                
+                                // mostrar popup de "tem certeza?"
+                                
+                                String result = save().toString(); // TODO: QUAL É O ATRIBUTO DE IDENTIFICAÇÃO?
                                 Intent data = new Intent();
-                                data.putExtra("RESULT", result);
+                                
+                                data.putExtra("DELETE", result);
+                                // TODO: fazer com que a classe que vai pegar o resultado, efetivamente exclua o registro
+                                // como pesquisar na classe que vai receber essa parada?
+                                
                                 setResult(RESULT_OK, data);
                                 finish();
                         }
                 });
                 
-                return buttonSave;
+                return buttonDelete;
         }
         
         public Button createClearButton() {
-                Button buttonClear = new Button(this);
+                buttonClear = new Button(this);
                 Drawable clearIcon = getResources().getDrawable(R.drawable.ic_action_discard);
                 buttonClear.setCompoundDrawablesWithIntrinsicBounds(null, clearIcon, null, null);
                 buttonClear.setText(getResources().getString(string.btn_clear));
@@ -715,7 +744,7 @@ public abstract class FormActivity extends Activity {
         }
         
         public Button createCancelButton() {
-                Button buttonCancel = new Button(this);
+                buttonCancel = new Button(this);
                 Drawable cancelIcon = getResources().getDrawable(R.drawable.ic_action_cancel);
                 buttonCancel.setCompoundDrawablesWithIntrinsicBounds(null, cancelIcon, null, null);
                 buttonCancel.setText(getResources().getString(string.btn_cancel));
