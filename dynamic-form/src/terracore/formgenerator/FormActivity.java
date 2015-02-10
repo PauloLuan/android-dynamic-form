@@ -20,7 +20,9 @@ import terracore.formgenerator.accordion.FormAccordion;
 import terracore.formgenerator.camera.FormCamera;
 import terracore.formgenerator.spinner.SelectionHandler;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -688,7 +690,42 @@ public abstract class FormActivity extends Activity {
                 // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonSave.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
+                buttonSave.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                showConfirmSaveDialog();
+                        }
+                });
+                
                 return buttonSave;
+        }
+        
+        public void showConfirmSaveDialog() {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
+                alertDialogBuilder.setTitle("Atenção");
+                alertDialogBuilder.setMessage("Deseja Salvar?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                
+                                String result = save().toString(); // TODO: QUAL É O ATRIBUTO DE IDENTIFICAÇÃO?
+                                Intent data = new Intent();
+                                
+                                data.putExtra("type", "save");
+                                data.putExtra("data", result);
+                                
+                                setResult(RESULT_OK, data);
+                                finish();
+                        }
+                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                setResult(RESULT_CANCELED, new Intent());
+                                finish();
+                        }
+                });
+                
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
         }
         
         public Button createDeleteButton() {
@@ -703,24 +740,39 @@ public abstract class FormActivity extends Activity {
                 buttonDelete.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                
-                                // if(atributoIdentificador) {  ...  } else { finish(); }
-                                
-                                // mostrar popup de "tem certeza?"
-                                
-                                String result = save().toString(); // TODO: QUAL É O ATRIBUTO DE IDENTIFICAÇÃO?
-                                Intent data = new Intent();
-                                
-                                data.putExtra("DELETE", result);
-                                // TODO: fazer com que a classe que vai pegar o resultado, efetivamente exclua o registro
-                                // como pesquisar na classe que vai receber essa parada?
-                                
-                                setResult(RESULT_OK, data);
-                                finish();
+                                showConfirmDeleteDialog();
                         }
                 });
                 
                 return buttonDelete;
+        }
+        
+        public void showConfirmDeleteDialog() {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
+                alertDialogBuilder.setTitle("Atenção");
+                alertDialogBuilder.setMessage("Deseja Salvar?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                
+                                String result = save().toString(); // TODO: QUAL É O ATRIBUTO DE IDENTIFICAÇÃO?
+                                Intent data = new Intent();
+                                
+                                data.putExtra("type", "delete");
+                                data.putExtra("data", result);
+                                
+                                setResult(RESULT_OK, data);
+                                finish();
+                        }
+                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                setResult(RESULT_CANCELED, new Intent());
+                                finish();
+                        }
+                });
+                
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
         }
         
         public Button createClearButton() {
@@ -759,5 +811,24 @@ public abstract class FormActivity extends Activity {
                 });
                 
                 return buttonCancel;
+        }
+        
+        @Override
+        public void onBackPressed() {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
+                alertDialogBuilder.setTitle("Atenção");
+                alertDialogBuilder.setMessage("Deseja realmente sair?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                finish();
+                        }
+                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                        }
+                });
+                
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
         }
 }
