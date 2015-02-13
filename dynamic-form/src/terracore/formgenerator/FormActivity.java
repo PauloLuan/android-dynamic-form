@@ -23,7 +23,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -43,8 +42,15 @@ import android.widget.TableRow;
  * FormActivity allows you to create dynamic form layouts based upon a json
  * schema file. This class should be sub-classed.
  * 
+ * All buttons on this screen are created without any action.
+ * 
+ * The library provides only the components, the application rules will stay on
+ * the class that extends this class.
+ * 
  * @author Jeremy Brown
- */
+ * @author Paulo Luan
+ * 
+ * */
 public abstract class FormActivity extends Activity {
         public static final String            SCHEMA_KEY_ID                    = "id";
         public static final String            SCHEMA_KEY_NAME                  = "name";
@@ -690,42 +696,7 @@ public abstract class FormActivity extends Activity {
                 // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonSave.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
-                buttonSave.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                showConfirmSaveDialog();
-                        }
-                });
-                
                 return buttonSave;
-        }
-        
-        public void showConfirmSaveDialog() {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
-                alertDialogBuilder.setTitle("Atenção");
-                alertDialogBuilder.setMessage("Deseja Salvar?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                
-                                String result = save().toString(); // TODO: QUAL É O ATRIBUTO DE IDENTIFICAÇÃO?
-                                Intent data = new Intent();
-                                
-                                data.putExtra("type", "save");
-                                data.putExtra("data", result);
-                                
-                                setResult(RESULT_OK, data);
-                                finish();
-                        }
-                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                setResult(RESULT_CANCELED, new Intent());
-                                finish();
-                        }
-                });
-                
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
         }
         
         public Button createDeleteButton() {
@@ -737,42 +708,7 @@ public abstract class FormActivity extends Activity {
                 // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonDelete.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
-                buttonDelete.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                showConfirmDeleteDialog();
-                        }
-                });
-                
                 return buttonDelete;
-        }
-        
-        public void showConfirmDeleteDialog() {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
-                alertDialogBuilder.setTitle("Atenção");
-                alertDialogBuilder.setMessage("Deseja Salvar?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                
-                                String result = save().toString(); // TODO: QUAL É O ATRIBUTO DE IDENTIFICAÇÃO?
-                                Intent data = new Intent();
-                                
-                                data.putExtra("type", "delete");
-                                data.putExtra("data", result);
-                                
-                                setResult(RESULT_OK, data);
-                                finish();
-                        }
-                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                setResult(RESULT_CANCELED, new Intent());
-                                finish();
-                        }
-                });
-                
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
         }
         
         public Button createClearButton() {
