@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -51,7 +52,7 @@ import android.widget.TableRow;
  * @author Paulo Luan
  * 
  * */
-public abstract class FormActivity extends Activity {
+public class FormActivity extends Activity implements FormInterface {
         public static final String            SCHEMA_KEY_ID                    = "id";
         public static final String            SCHEMA_KEY_NAME                  = "name";
         public static final String            SCHEMA_KEY_TYPE                  = "type";
@@ -687,6 +688,13 @@ public abstract class FormActivity extends Activity {
                 _formLayout.addView(buttonsLayout);
         }
         
+        /**
+         * ===============================================================
+         * 
+         * Button Save Functions
+         * 
+         * ===============================================================
+         * */
         public Button createSaveButton() {
                 buttonSave = new Button(this);
                 Drawable saveIcon = getResources().getDrawable(R.drawable.ic_action_save);
@@ -696,9 +704,47 @@ public abstract class FormActivity extends Activity {
                 // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonSave.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
+                setSaveButtonListener();
+                
                 return buttonSave;
         }
         
+        public void setSaveButtonListener() {
+                buttonSave.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                showConfirmSaveDialog();
+                        }
+                });
+        }
+        
+        public void showConfirmSaveDialog() {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
+                alertDialogBuilder.setTitle("Atenção");
+                alertDialogBuilder.setMessage("Deseja Salvar?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                saveTask(save().toString());
+                        }
+                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                setResult(RESULT_CANCELED, new Intent());
+                                finish();
+                        }
+                });
+                
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+        }
+        
+        /**
+         * ===============================================================
+         * 
+         * Delete button functions
+         * 
+         * ===============================================================
+         * */
         public Button createDeleteButton() {
                 buttonDelete = new Button(this);
                 Drawable saveIcon = getResources().getDrawable(R.drawable.ic_action_discard);
@@ -708,7 +754,38 @@ public abstract class FormActivity extends Activity {
                 // The last parameter "1" is the magic that refers to the Weight, this is necessary to align the three buttons into the container.   
                 buttonDelete.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
                 
+                setDeleteButtonListener();
+                
                 return buttonDelete;
+        }
+        
+        public void setDeleteButtonListener() {
+                buttonDelete.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                showConfirmDeleteDialog();
+                        }
+                });
+        }
+        
+        public void showConfirmDeleteDialog() {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FormActivity.this);
+                alertDialogBuilder.setTitle("Atenção");
+                alertDialogBuilder.setMessage("Deseja Salvar?").setCancelable(false).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                deleteTask();
+                        }
+                }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                setResult(RESULT_CANCELED, new Intent());
+                                finish();
+                        }
+                });
+                
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
         }
         
         public Button createClearButton() {
@@ -767,4 +844,11 @@ public abstract class FormActivity extends Activity {
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
         }
+        
+        @Override
+        public void saveTask(String resultJson) {}
+        
+        @Override
+        public void deleteTask() {}
+        
 }
