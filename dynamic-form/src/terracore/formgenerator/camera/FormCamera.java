@@ -92,7 +92,11 @@ public class FormCamera extends FormWidget implements Serializable {
          * @param path
          */
         public void addPhoto(String photo) {
-                photos.add(photo);
+                List<String> newList = new ArrayList<String>();
+                newList.addAll(photos);
+                newList.add(photo);
+                
+                photos = newList;
                 updatePhotos();
         }
         
@@ -100,7 +104,10 @@ public class FormCamera extends FormWidget implements Serializable {
                 photosPreview.removeAllViews();
                 
                 for (String photoPath : photos) {
-                        if (new File(photoPath).exists()) {
+                        File file = new File(photoPath);
+                        boolean exists = file.exists();
+                        
+                        if (exists) {
                                 ImageView imageView = new ImageView(context);
                                 imageView.setPadding(10, 10, 10, 10);
                                 

@@ -41,14 +41,12 @@ public class CameraActivity extends Activity {
                                         int requestCode,
                                         int resultCode,
                                         Intent data) {
-                super.onActivityResult(requestCode, resultCode, data);
-                
                 FormCamera widget = FormCamera.getInstance();
-                
                 if (widget != null) {
                         widget.addPhoto(fileUri.getPath());
                 }
                 
+                super.onActivityResult(requestCode, resultCode, data);
                 finish();
         }
         
