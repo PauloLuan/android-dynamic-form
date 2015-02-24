@@ -3,6 +3,7 @@ package terracore.formgenerator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -91,6 +92,8 @@ public class FormActivity extends Activity implements FormInterface {
         public Button                         buttonSave;
         public Button                         buttonCancel;
         public Button                         buttonClear;
+        
+        private List<String>                  photos;
         
         // -----------------------------------------------
         //
@@ -328,13 +331,28 @@ public class FormActivity extends Activity implements FormInterface {
          * populate w/ a value
          */
         protected void populate(String jsonString) {
+                JSONObject data = null;
+                JSONArray properties = null;
+                
                 try {
-                        String property;
-                        FormWidget widget;
-                        JSONObject data = new JSONObject(jsonString);
-                        JSONArray properties = data.names();
-                        
-                        for (int i = 0; i < properties.length(); i++) {
+                        data = new JSONObject(jsonString);
+                        properties = data.names();
+                }
+                catch (JSONException e) {
+                        Log.e(LOG_TAG, e.getMessage());
+                }
+                
+                if (data != null && properties != null) {
+                        processProperties(data, properties);
+                }
+        }
+        
+        public void processProperties(JSONObject data, JSONArray properties) {
+                String property;
+                FormWidget widget;
+                
+                for (int i = 0; i < properties.length(); i++) {
+                        try {
                                 property = properties.getString(i);
                                 
                                 if (_map.containsKey(property)) {
@@ -342,7 +360,10 @@ public class FormActivity extends Activity implements FormInterface {
                                         
                                         if (widget instanceof FormCamera) {
                                                 FormCamera formCamera = (FormCamera) widget;
-                                                ArrayList<String> photos = jsonArrayToList(data.getJSONArray(property));
+                                                
+                                                String photosArray = data.getString(property);
+                                                photos = Arrays.asList(photosArray.split("\\, "));
+                                                
                                                 formCamera.setPhotos(photos);
                                         }
                                         else {
@@ -351,10 +372,11 @@ public class FormActivity extends Activity implements FormInterface {
                                         }
                                 }
                         }
+                        catch (JSONException e) {
+                                Log.e(LOG_TAG, e.getMessage());
+                        }
                 }
-                catch (JSONException e) {
-                        Log.e(LOG_TAG, e.getMessage());
-                }
+                
         }
         
         public ArrayList<String> jsonArrayToList(JSONArray jArray) {
@@ -399,7 +421,11 @@ public class FormActivity extends Activity implements FormInterface {
                                         
                                         if (widget instanceof FormCamera) {
                                                 FormCamera formCamera = (FormCamera) widget;
-                                                data.put(propertyId, formCamera.getPhotos());
+                                                String concatArray = Arrays.toString(formCamera.getPhotos().toArray());
+                                                concatArray = concatArray.substring(1, concatArray.length() - 1);
+                                                
+                                                data.put(propertyId, concatArray);
+                                                setPhotos(formCamera.getPhotos());
                                         }
                                         else {
                                                 String value = widget.getValue() != null ? widget.getValue() : "";
@@ -850,5 +876,13 @@ public class FormActivity extends Activity implements FormInterface {
         
         @Override
         public void deleteTask() {}
+        
+        public List<String> getPhotos() {
+                return photos;
+        }
+        
+        public void setPhotos(List<String> photos) {
+                this.photos = photos;
+        }
         
 }
