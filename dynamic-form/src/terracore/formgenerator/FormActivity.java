@@ -367,6 +367,7 @@ public class FormActivity extends Activity implements FormInterface {
                                                 photos = Arrays.asList(photosArray.split("\\, "));
                                                 
                                                 formCamera.setPhotos(photos);
+                                                formCamera.updatePhotos();
                                         }
                                         else {
                                                 String value = data.getString(property);

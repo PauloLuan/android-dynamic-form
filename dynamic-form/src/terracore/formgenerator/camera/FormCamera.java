@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -84,16 +85,16 @@ public class FormCamera extends FormWidget implements Serializable {
          * 
          * @param path
          */
-        public void addPhoto(String photo) {
+        public synchronized void addPhoto(String photo) {
                 List<String> newList = new ArrayList<String>();
                 newList.addAll(photos);
                 newList.add(photo);
                 
-                photos = newList;
+                setPhotos(newList);
                 updatePhotos();
         }
         
-        public void updatePhotos() {
+        public synchronized void updatePhotos() {
                 photosPreview.removeAllViews();
                 
                 for (String photoPath : photos) {
@@ -112,6 +113,24 @@ public class FormCamera extends FormWidget implements Serializable {
                                 photosPreview.addView(imageView);
                         }
                 }
+                
+                verifyPhotos();
+        }
+        
+        public synchronized void verifyPhotos() {
+                List<String> newList = new ArrayList<String>();
+                Log.e("Count das photos: ", "" + newList.size());
+                
+                for (String photo : photos) {
+                        boolean exists = new File(photo).exists();
+                        
+                        if (exists) {
+                                newList.add(photo);
+                        }
+                }
+                Log.e("Count das photos 2: ", "" + newList.size());
+                
+                setPhotos(newList);
         }
         
         public ImageView createImageView(String photoPath) {
@@ -201,9 +220,7 @@ public class FormCamera extends FormWidget implements Serializable {
                 return photos;
         }
         
-        public void setPhotos(List<String> photos) {
+        public synchronized void setPhotos(List<String> photos) {
                 this.photos = photos;
-                updatePhotos();
         }
-        
 }
