@@ -77,12 +77,13 @@ public class CameraActivity extends Activity {
                 }
                 
                 String fileName;
+                String dateString = new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date());
                 
                 if (idHash != null) {
-                        fileName = idHash;
+                        fileName = idHash + "_" + dateString;
                 }
                 else {
-                        fileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                        fileName = dateString;
                 }
                 
                 File mediaFile;
