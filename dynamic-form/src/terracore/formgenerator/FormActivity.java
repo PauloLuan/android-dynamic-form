@@ -755,8 +755,6 @@ public class FormActivity extends Activity implements FormInterface {
                 }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                setResult(RESULT_CANCELED, new Intent());
-                                finish();
                         }
                 });
                 
