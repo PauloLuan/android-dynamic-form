@@ -22,9 +22,13 @@ public class CameraActivity extends Activity {
         private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
         private Uri              fileUri;
         
+        private static String    idHash;
+        
         @Override
         public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
+                
+                idHash = getIntent().getExtras().getString("idHash");
                 
                 // create Intent to take a picture and return control to the calling application
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -72,14 +76,21 @@ public class CameraActivity extends Activity {
                         }
                 }
                 
-                // Create a media file name
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String fileName;
+                
+                if (idHash != null) {
+                        fileName = idHash;
+                }
+                else {
+                        fileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                }
+                
                 File mediaFile;
                 if (type == MEDIA_TYPE_IMAGE) {
-                        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+                        mediaFile = new File(mediaStorageDir.getPath() + File.separator + fileName + ".jpg");
                 }
                 else if (type == MEDIA_TYPE_VIDEO) {
-                        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "VID_" + timeStamp + ".mp4");
+                        mediaFile = new File(mediaStorageDir.getPath() + File.separator + fileName + ".mp4");
                 }
                 else {
                         return null;

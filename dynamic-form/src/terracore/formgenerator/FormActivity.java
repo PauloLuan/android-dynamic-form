@@ -94,6 +94,7 @@ public class FormActivity extends Activity implements FormInterface {
         public Button                         buttonClear;
         
         private List<String>                  photos;
+        private String                        idHash;
         
         // -----------------------------------------------
         //
@@ -360,6 +361,7 @@ public class FormActivity extends Activity implements FormInterface {
                                         
                                         if (widget instanceof FormCamera) {
                                                 FormCamera formCamera = (FormCamera) widget;
+                                                formCamera.setIdHash(idHash);
                                                 
                                                 String photosArray = data.getString(property);
                                                 photos = Arrays.asList(photosArray.split("\\, "));
@@ -881,6 +883,14 @@ public class FormActivity extends Activity implements FormInterface {
         
         public void setPhotos(List<String> photos) {
                 this.photos = photos;
+        }
+        
+        public String getIdHash() {
+                return idHash;
+        }
+        
+        public void setIdHash(String idHash) {
+                this.idHash = idHash;
         }
         
 }

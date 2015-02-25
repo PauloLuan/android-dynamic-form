@@ -28,6 +28,7 @@ public class FormCamera extends FormWidget implements Serializable {
         private Context              context;
         
         List<String>                 photos = new ArrayList<String>();
+        String                       idHash;
         
         private HorizontalScrollView horizontalScrollView;
         private LinearLayout         photosPreview;
@@ -71,18 +72,10 @@ public class FormCamera extends FormWidget implements Serializable {
                         @Override
                         public void onClick(View v) {
                                 Intent intent = new Intent(context, CameraActivity.class);
+                                intent.putExtra("idHash", idHash);
                                 context.startActivity(intent);
                         }
                 });
-        }
-        
-        public List<String> getPhotos() {
-                return photos;
-        }
-        
-        public void setPhotos(List<String> photos) {
-                this.photos = photos;
-                updatePhotos();
         }
         
         /**
@@ -195,4 +188,22 @@ public class FormCamera extends FormWidget implements Serializable {
                 
                 return inSampleSize;
         }
+        
+        public String getIdHash() {
+                return idHash;
+        }
+        
+        public void setIdHash(String idHash) {
+                this.idHash = idHash;
+        }
+        
+        public List<String> getPhotos() {
+                return photos;
+        }
+        
+        public void setPhotos(List<String> photos) {
+                this.photos = photos;
+                updatePhotos();
+        }
+        
 }
