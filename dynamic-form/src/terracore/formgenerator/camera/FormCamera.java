@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import makemachine.android.examples.forms.R;
+import makemachine.android.examples.forms.R.string;
 import terracore.formgenerator.FormWidget;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +19,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -160,6 +164,42 @@ public class FormCamera extends FormWidget implements Serializable {
                                 context.startActivity(intent);
                         }
                 });
+                
+                imageView.setOnLongClickListener(new OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                                showRemovePictureMessage(photoPath);
+                                return true;
+                        }
+                });
+        }
+        
+        private void showRemovePictureMessage(String photoPath) {
+                final File photoFile = new File(photoPath);
+                
+                if (photoFile.exists()) {
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                        alertDialogBuilder.setTitle(string.lbl_caution);
+                        alertDialogBuilder.setMessage(string.lbl_remove_photo).setCancelable(false).setPositiveButton(string.lbl_yes, new DialogInterface.OnClickListener() {
+                                public void onClick(
+                                                    DialogInterface dialog,
+                                                    int id) {
+                                        photoFile.delete();
+                                        updatePhotos();
+                                        dialog.cancel();
+                                }
+                        }).setNegativeButton(string.lbl_no, new DialogInterface.OnClickListener() {
+                                public void onClick(
+                                                    DialogInterface dialog,
+                                                    int id) {
+                                        dialog.cancel();
+                                }
+                        });
+                        
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                        
+                }
         }
         
         public static FormCamera getInstance() {

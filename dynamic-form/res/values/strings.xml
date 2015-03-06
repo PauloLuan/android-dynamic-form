@@ -7,6 +7,13 @@
     <!-- Form Activity -->
     <string name="btn_save">Salvar</string>
     <string name="btn_clear">Limpar</string>
+    <string name="btn_delete">Excluir</string>
     <string name="btn_cancel">Cancelar</string>
+
+    <!-- Form Camera -->
+    <string name="lbl_caution">Atenção</string>
+    <string name="lbl_remove_photo">Deseja remover a foto?</string>
+    <string name="lbl_yes">Sim</string>
+    <string name="lbl_no">Não</string>
 
 </resources>
