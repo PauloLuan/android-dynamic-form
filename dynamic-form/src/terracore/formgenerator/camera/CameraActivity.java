@@ -22,6 +22,10 @@ public class CameraActivity extends Activity {
         private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
         private Uri              fileUri;
         
+        /*
+         * This is the id that will be used on the application to give the name
+         * of the file.
+         */
         private static String    idHash;
         
         @Override
